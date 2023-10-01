@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>calculoimc.htm - cálculo Imc</title>
+    <style>
+    body{
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, rgb(29, 136, 207), rgb(110, 25, 143));
+            text-align: center;
+            padding: 50px;
+            margin: 50px;
+            height: 100px;
+            color: #fff;
+}
+
+resultado{
+  text-align: center;
+  fonte-size: 20px; 
+ 
+  
+}
+    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+<meta charset="utf-8"/>
+</head>
+<body>
+  <p1>Calculadora de IMC</p1>
+<form action="">
+<label>Insira seu peso:</label>
+<input  type="text" id="peso" onkeypress="return SomenteNumero(event);"/>
+  <label>Insira sua altura em centímetros:</label>
+<input  type="text" id="altura" onkeypress="return SomenteNumero(event);"/>
+<input type="submit" value="Enviar" />
+
+<div id="resultado"></div>
+</form>
+<script>
+  var form = document.querySelector('form');
+
+  var imc=0;
+  var resultado = document.getElementById('resultado');
+  
+
+form.addEventListener('submit',function(event){
+  var altura =parseInt(form.altura.value);
+  var peso = parseInt(form.peso.value);
+  imc=(peso/Math.pow((altura/100),2)).toFixed(2);
+ if(imc <16){
+   resultado.innerHTML="Baixo peso muito grave "+imc+" kg/m²";
+    }else if(imc >=16 && imc <=16.99){
+      resultado.innerHTML="Baixo peso grave "+imc+" kg/m²";
+    }else if(imc >=17.00 && imc<=18.49){
+      resultado.innerHTML="Baixo peso "+imc+" kg/m²";
+    }else if(imc >=18.50 && imc <=24.99){
+      resultado.innerHTML="Peso normal "+imc+" kg/m²";
+    }else if(imc >=25.00 && imc <=29.99){
+      resultado.innerHTML="Sobrepeso "+imc+" kg/m²";
+    }else if(imc >=30 && imc <=34.99){
+      resultado.innerHTML="Obesidade grau I  "+imc+" kg/m²";
+    }else if(imc >=35.00 && imc <=39.99){
+      resultado.innerHTML="Obesidade grau II "+imc+" kg/m²";
+    }else if(imc >=40.00){
+      resultado.innerHTML="Obesidade grau III (obesidade mórbida) "+imc+" kg/m²";
+    }
+   event.preventDefault(); 
+});
+
+function SomenteNumero(e){
+ var tecla=(window.event)?event.keyCode:e.which;
+ if((tecla>47 && tecla<58)) return true;
+ else{
+ if (tecla==8 || tecla==0) return true;
+ else  return false;
+ }
+}
+Resources
+</script>
+</body>
+</html>
